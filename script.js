@@ -1,21 +1,24 @@
-let display = document.getElementById("display");
+function addTask() {
+    let input = document.getElementById("taskInput");
+    let task = input.value.trim();
 
-function addValue(value) {
-    display.value += value;
-}
-
-function clearDisplay() {
-    display.value = "";
-}
-
-function deleteLast() {
-    display.value = display.value.slice(0, -1);
-}
-
-function calculate() {
-    try {
-        display.value = eval(display.value);
-    } catch {
-        display.value = "Error";
+    if (task === "") {
+        alert("Please enter a task!");
+        return;
     }
+
+    let li = document.createElement("li");
+
+    li.innerHTML = `
+        <span>${task}</span>
+        <button class="delete-btn" onclick="deleteTask(this)">Delete</button>
+    `;
+
+    document.getElementById("taskList").appendChild(li);
+
+    input.value = "";
+}
+
+function deleteTask(button) {
+    button.parentElement.remove();
 }
